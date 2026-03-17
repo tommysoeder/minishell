@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomamart <tomamart@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 13:35:28 by aialonso          #+#    #+#             */
-/*   Updated: 2026/03/17 14:33:32 by tomamart         ###   ########.fr       */
+/*   Updated: 2026/03/17 15:31:33 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	main(void)
 {
-	char	*line;
 	t_shell	*shell;
 	int		n;
 
@@ -23,16 +22,15 @@ int	main(void)
 	while (1)
 	{
 		signals_interactive(); // manejo de señales en modo interactivo
-		line = readline("minishell$ ");
-		if (!line)
+		shell->line = readline("minishell$ ");
+		if (!shell->line)
 		{
 			break ;
 			printf("exit\n");
 		}
-		if (*line)
-			add_history(line);
-		tokenize_input(line, shell);
-		free(line);
+		add_history(shell->line);
+		tokenize_input(shell->line, shell);
+		free(shell->line);
 		n = shell->num_tokens;
 		while (n > 0)
 		{

@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 19:03:05 by aialonso          #+#    #+#             */
-/*   Updated: 2026/03/16 17:49:19 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/03/17 15:56:34 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void	tokenize_input(char	*line, t_shell *shell)
 	{
 		tokes[iter] = save_token(&line);
 		list_tokens[iter] = tip_token(tokes[iter]);
+		if (*(tokes[iter]) == 34 || *(tokes[iter]) == 39)
+			fix_quotes_in_token(&tokes[iter]);
 		iter++;
 	}
 	shell->tokens = tokes;

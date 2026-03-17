@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 18:52:29 by aialonso          #+#    #+#             */
-/*   Updated: 2026/03/11 17:54:27 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/03/17 16:00:48 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <readline/history.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include "signals.h"
 
 typedef struct s_shell
 {
