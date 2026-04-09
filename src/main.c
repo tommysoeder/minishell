@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomamart <tomamart@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 13:35:28 by aialonso          #+#    #+#             */
-/*   Updated: 2026/03/20 09:53:07 by tomamart         ###   ########.fr       */
+/*   Updated: 2026/04/08 18:21:11 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(void)
 			break ;
 			printf("exit\n");
 		}
+		cheker_end_line(&shell->line);
 		add_history(shell->line);
 		tokenize_input(shell->line, shell);
 		free(shell->line);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomamart <tomamart@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 19:03:05 by aialonso          #+#    #+#             */
-/*   Updated: 2026/03/20 09:52:59 by tomamart         ###   ########.fr       */
+/*   Updated: 2026/04/08 18:21:29 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,12 @@ static int	count_tokens(char	*line)
 void	tokenize_input(char	*line, t_shell *shell)
 {
 	char	**tokes;
+	char	**lines;
 	int		*list_tokens;
 	int		iter;
 
 	iter = 0;
+	lines = NULL;
 	shell->num_tokens = count_tokens(line);
 	tokes = malloc(sizeof(char *) * (shell->num_tokens + 1));
 	if (!tokes)
@@ -97,8 +99,6 @@ void	tokenize_input(char	*line, t_shell *shell)
 	{
 		tokes[iter] = save_token(&line);
 		list_tokens[iter] = tip_token(tokes[iter]);
-		if (*(tokes[iter]) == 34 || *(tokes[iter]) == 39)
-			fix_quotes_in_token(&tokes[iter]);
 		iter++;
 	}
 	shell->tokens = tokes;

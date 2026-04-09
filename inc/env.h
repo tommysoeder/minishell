@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/06 18:52:29 by aialonso          #+#    #+#             */
-/*   Updated: 2026/03/17 16:00:48 by aialonso         ###   ########.fr       */
+/*   Created: 2026/04/08 15:07:40 by aialonso          #+#    #+#             */
+/*   Updated: 2026/04/08 15:07:47 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef ENV_H
+# define ENV_H
 
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include "signals.h"
+# include <unistd.h>
 
-typedef struct s_shell
-{
-	char	*line;
-	void	*resultado;
-	char	**tokens;
-	int		num_tokens;
-	int		*list_tokens;
-}	t_shell;
-
-void	tokenize_input(char	*line, t_shell *shell);
+char	*get_env_value(char **envp, char *key);
 
 #endif

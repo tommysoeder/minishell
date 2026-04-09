@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fix_quotes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomamart <tomamart@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 15:59:48 by aialonso          #+#    #+#             */
-/*   Updated: 2026/03/20 09:53:12 by tomamart         ###   ########.fr       */
+/*   Updated: 2026/04/08 17:57:33 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	count_token(char *str)
 	{
 		if (str[iter] == '$' && str[0] == 34)
 		{
-			count = count + funcion(str[count]);
+			//count = count + funcion();
 			while (str[iter] != ' ' && str[iter] != '\0' && str[iter] != 34)
 				iter++;
 			continue ;
@@ -45,9 +45,10 @@ void	handle_double_quotes(char **str, char *new_token)
 	{
 		if ((*str)[count] == '$')
 		{
-			algo(); //añadir la variable del $ en new_token
+			//algo(); //añadir la variable del $ en new_token
 		}
-		new_token[count] = (*str)[count++ + 1];
+		new_token[count] = (*str)[count + 1];
+		count++;
 	}
 }
 
@@ -71,7 +72,10 @@ void	fix_quotes_in_token(char **str)
 	else
 	{
 		while ((*str)[count + 1] != 39)
-			new_token[count] = (*str)[count++ + 1];
+		{
+			new_token[count] = (*str)[count + 1];
+			count++;	
+		}
 	}
 	free(*str);
 	*str = new_token;
