@@ -17,7 +17,7 @@
 
 | Fase | Responsable | Estado |
 |------|-------------|--------|
-| 0. Configuración inicial | Juntos | `[ ]` |
+| 0. Configuración inicial | Juntos | `[x]` |
 | 1. Lexer y tokenización | Dev A | `[ ]` |
 | 2. Parsing y árbol AST | Dev B | `[ ]` |
 | 3. Expansión de variables | Dev A | `[ ]` |
@@ -33,20 +33,20 @@
 ## Fase 0 — Configuración inicial
 > ⏱️ 1-2 días · Juntos
 
-- [ ] Leer el subject completo entre los dos y resolver dudas
-- [ ] Definir la arquitectura: carpetas `src/`, `includes/`, `libft/`
-- [ ] Configurar el Makefile con reglas `all`, `clean`, `fclean`, `re` *(Dev A)*
-- [ ] Integrar libft propia (o confirmar funciones permitidas) *(Dev B)*
-- [ ] Inicializar el repo de GitHub y definir ramas de trabajo
-- [ ] Acordar convenciones de naming y estilo antes de empezar
+- [x] Leer el subject completo entre los dos y resolver dudas
+- [x] Definir la arquitectura: carpetas `src/`, `includes/`, `libft/`
+- [x] Configurar el Makefile con reglas `all`, `clean`, `fclean`, `re` *(Dev A)*
+- [x] Integrar libft propia (o confirmar funciones permitidas) *(Dev B)*
+- [x] Inicializar el repo de GitHub y definir ramas de trabajo
+- [x] Acordar convenciones de naming y estilo antes de empezar
 
 ---
 
 ## Fase 1 — Lexer y tokenización
 > ⏱️ 3-4 días · Dev A
 
-- [ ] Definir los tipos de token: `WORD`, `PIPE`, `REDIR`, `HEREDOC`, etc.
-- [ ] Implementar el lexer que lee la línea y genera una lista de tokens
+- [x] Definir los tipos de token: `WORD`, `PIPE`, `REDIR`, `HEREDOC`, etc.
+- [x] Implementar el lexer que lee la línea y genera una lista de tokens
 - [ ] Manejar comillas simples: preservar contenido literal
 - [ ] Manejar comillas dobles: expansión de `$VAR` y `$?`
 - [ ] Detectar y reportar errores: comillas sin cerrar, pipes vacíos
