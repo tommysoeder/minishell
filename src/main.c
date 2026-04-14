@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 13:35:28 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/08 18:21:11 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/09 17:43:03 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@ int	main(void)
 		signals_interactive(); // manejo de señales en modo interactivo
 		shell->line = readline("minishell$ ");
 		if (!shell->line)
-		{
 			break ;
-			printf("exit\n");
-		}
 		cheker_end_line(&shell->line);
+		if (!shell->line)
+			break ;
 		add_history(shell->line);
 		tokenize_input(shell->line, shell);
 		free(shell->line);

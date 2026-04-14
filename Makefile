@@ -6,7 +6,7 @@
 #    By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/29 12:33:05 by aialonso          #+#    #+#              #
-#    Updated: 2026/04/08 18:13:43 by aialonso         ###   ########.fr        #
+#    Updated: 2026/04/09 16:47:32 by aialonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ FLA_I_LIB = -I $(INC_LIB)
 
 COM_LIB = $(LIB)/libft.a
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror -g3
 DFLAGS =  -L $(LIB) -lft -lreadline
 
 CC = cc

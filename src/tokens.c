@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 19:03:05 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/08 18:21:29 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/13 14:10:44 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,57 @@ int	tip_token(char *str)
 		return (1);
 }
 
+int cout_len_token(char *str)
+{
+	int count;
+	int flag;
+
+	count = 0;
+	flag = 0;
+	while (str[count])
+	{
+		if (flag != 0 && (str[count] == 34 || str[count] == 39) && str[count - 1] != 92)
+			return (count - 1);
+		if ((str[count] == 34 || str[count] == 39) && str[count - 1] != 92)
+			flag = str[count];
+		if (flag == 0 && str[count] == ' ')
+			return (count);
+		count++;
+	}
+	return (count);
+}
 char	*save_token(char	**line)
 {
 	int		count;
+	int		flag;
 	char	*token;
-
-	count = 0;
-	while ((*line)[count])
-	{
-		if ((*line)[count] == ' ')
-			break ;
-		count++;
-	}
+	
+	while (ft_isspace(**line))
+		(*line)++;
+	count = cout_len_token(*line);
 	token = malloc(sizeof(char) * (count + 1));
 	token[count] = '\0';
 	count = 0;
+	flag = 0;
 	while (**line)
 	{
-		if (**line == ' ')
+		if (**line == 92 && ((*line)[1] == 34 || (*line)[1] == 39))
 		{
-			*line = *line + 1;
-			break ;
+			(*line)++;
+			token[count] = **line;
+			count++;
+			(*line)++;
+			continue ;
 		}
+		if (flag != 0 && (**line == 34 || **line == 39))
+			return (token);
+		if (**line == 34 || **line == 39)
+		{
+			flag = **line;
+			(*line)++;
+		}
+		if (flag == 0 && ft_isspace(**line))
+			break ;
 		token[count] = **line;
 		count++;
 		(*line)++;
@@ -66,6 +95,15 @@ static int	count_tokens(char	*line)
 	count_tokens = 0;
 	while (*line)
 	{
+		if (*line == 92 && (*(line + 1) == 34 || *(line + 1) == 39))
+			line = line + 2;
+		if (flag == 0 && (*line == 34 || *line == 39))
+		{
+			flag = *line;
+			count_tokens++;
+		}
+		else if (flag == *line)
+			flag -= *line - 1;
 		if (flag == 0 && (*line != ' ' && *line != '\0'))
 		{
 			flag++;
@@ -81,18 +119,16 @@ static int	count_tokens(char	*line)
 void	tokenize_input(char	*line, t_shell *shell)
 {
 	char	**tokes;
-	char	**lines;
 	int		*list_tokens;
 	int		iter;
 
 	iter = 0;
-	lines = NULL;
 	shell->num_tokens = count_tokens(line);
 	tokes = malloc(sizeof(char *) * (shell->num_tokens + 1));
 	if (!tokes)
 		return ;
 	tokes[shell->num_tokens] = NULL;
-	list_tokens = malloc(sizeof(int) * count_tokens(line));
+	list_tokens = malloc(sizeof(int) * shell->num_tokens);
 	if (!list_tokens)
 		return ;
 	while (*line)

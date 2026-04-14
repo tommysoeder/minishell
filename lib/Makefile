@@ -6,7 +6,7 @@
 #    By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/07 13:18:47 by aialonso          #+#    #+#              #
-#    Updated: 2026/04/08 18:10:09 by aialonso         ###   ########.fr        #
+#    Updated: 2026/04/09 18:59:44 by aialonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRC_PATH = src
 
 SOURCES =  	$(addprefix $(SRC_PATH)/,\
 			ft_bzero.c\
+			ft_isspace.c\
 			ft_calloc.c\
 			ft_strlen.c)
 
