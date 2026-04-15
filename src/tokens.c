@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 19:03:05 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/13 14:10:44 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/15 18:16:58 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,34 +86,88 @@ char	*save_token(char	**line)
 	return (token);
 }
 
+int who_com(char *line)
+{
+	int flag;
+	int iter;
+	
+	iter = 0;
+	if (line[iter] == 34 || line[iter] == 39)
+	{
+		flag = line[iter];
+		iter++;
+		while (line[iter] != flag)
+			iter++;
+	}
+	return (iter + 1);
+}
+
+static int is_oper(char *str)
+{
+	if (*str == 124)
+		return (1);
+	if (*str == 60)
+		return (1);
+	if (*str == 62)
+		return (1);
+	return (0);
+}
+
 static int	count_tokens(char	*line)
 {
-	int	flag;
 	int	count_tokens;
+	int	flag;
 
-	flag = 0;
 	count_tokens = 0;
+	flag = 0;
 	while (*line)
 	{
-		if (*line == 92 && (*(line + 1) == 34 || *(line + 1) == 39))
-			line = line + 2;
-		if (flag == 0 && (*line == 34 || *line == 39))
+		if (ft_isspace(*line))
+			flag = 0;
+		else if (is_oper(*line))
 		{
-			flag = *line;
+			if (is_oper(*(line + 1)))
+				line++;
 			count_tokens++;
+			flag = 0;
 		}
-		else if (flag == *line)
-			flag -= *line - 1;
-		if (flag == 0 && (*line != ' ' && *line != '\0'))
-		{
-			flag++;
-			count_tokens++;
-		}
-		if (flag == 1 && (*line == ' ' || *line == '\0'))
-			flag--;
-		line++;
+		else
+			if (flag == 0)
+			{
+				count_tokens++;
+				flag = 1;	
+			}	
+		line = line + who_com(*line);
 	}
 	return (count_tokens);
+}
+
+static int    count_tokens(char    *line)
+{
+    int    flag;
+    int    count_tokens;
+
+    flag = 0;
+    count_tokens = 0;
+    while (*line)
+    {
+        if (isopertor(*line))
+        {
+            count_tokens++;
+            line++;
+            if (isopertor(*line))
+                line++;
+        }
+        if (!ft_isspace(*line) && flag == 0)
+        {
+            flag++;
+            count_tokens++;
+        }
+        else if (ft_isspace(*(line + 1)) && flag != 0)
+            flag--;
+        line++;
+    }
+    return (count_tokens);
 }
 
 void	tokenize_input(char	*line, t_shell *shell)
