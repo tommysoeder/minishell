@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:37:14 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/14 13:08:25 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/16 15:04:01 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 char	*ft_realloc(char *str1, char *str2, int len1, int len2)
 {
-	int 	iter;
+	int		iter;
 	char	*line;
 
 	line = ft_calloc(len1 + len2 + 2, sizeof(char));
 	if (!line)
-		return (free(str1), free(str2),NULL);
+		return (free(str1), free(str2), NULL);
 	iter = 0;
 	while (iter < len1 + len2 + 1)
 	{
@@ -37,9 +37,9 @@ char	*ft_realloc(char *str1, char *str2, int len1, int len2)
 
 void	cheker_end_line(char **line)
 {
-	int	i;
-	int	flag;
-	char *temp;
+	int		i;
+	int		flag;
+	char	*temp;
 
 	i = 0;
 	flag = 0;

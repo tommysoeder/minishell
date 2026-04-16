@@ -6,7 +6,7 @@
 #    By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/29 12:33:05 by aialonso          #+#    #+#              #
-#    Updated: 2026/04/09 16:47:32 by aialonso         ###   ########.fr        #
+#    Updated: 2026/04/16 15:46:59 by aialonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ SOURCES =   $(addprefix $(SRC_PATH)/,\
 			cheker_line.c\
 			fix_quotes.c\
 			main.c\
-			tokens.c)
+			tokens/tokens.c\
+			tokens/token_utils.c\
+			)
 
 INC_PUS = inc
 INC_LIB = $(LIB)/inc
