@@ -6,7 +6,7 @@
 #    By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/29 12:33:05 by aialonso          #+#    #+#              #
-#    Updated: 2026/04/16 15:46:59 by aialonso         ###   ########.fr        #
+#    Updated: 2026/04/18 11:19:57 by aialonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,12 @@ LIB = lib
 SOURCES =   $(addprefix $(SRC_PATH)/,\
 			signals/signals.c\
 			cheker_line.c\
-			fix_quotes.c\
 			main.c\
 			tokens/tokens.c\
+			tokens/fix_quotes_check.c\
+			tokens/fix_quotes_copy.c\
+			tokens/fix_quotes_utils.c\
+			tokens/fix_quotes.c\
 			tokens/token_utils.c\
 			)
 

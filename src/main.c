@@ -6,17 +6,19 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 13:35:28 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/09 17:43:03 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/17 18:50:15 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	t_shell	*shell;
 	int		n;
 
+	(void)argv;
+	(void)argc;
 	n = 0;
 	shell = malloc(sizeof(t_shell));
 	while (1)
@@ -31,6 +33,7 @@ int	main(void)
 		add_history(shell->line);
 		tokenize_input(shell->line, shell);
 		free(shell->line);
+		clean_tokens(shell->tokens, envp);
 		n = shell->num_tokens;
 		while (n > 0)
 		{

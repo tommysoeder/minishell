@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fix_quotes.c                                       :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/17 15:59:48 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/16 15:57:11 by aialonso         ###   ########.fr       */
+/*   Created: 2025/08/07 16:41:46 by aialonso          #+#    #+#             */
+/*   Updated: 2026/04/17 11:42:30 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-void	clean_token(char **str)
+int	ft_isalpha(int c)
 {
-	
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1);
+	return (0);
 }
+
+// int	main(void)
+// {
+// 	printf("%d", ft_isalpha('6'));
+// 	return (0);
+// }

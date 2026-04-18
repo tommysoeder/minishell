@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 18:52:29 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/16 15:49:30 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/18 11:21:19 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include "signals.h"
 # include "libft.h"
+# include "tokens.h"
 
 typedef struct s_shell
 {
@@ -29,11 +30,9 @@ typedef struct s_shell
 	int		*list_tokens;
 }	t_shell;
 
-void	tokenize_input(char	*line, t_shell *shell);
+
 void	cheker_end_line(char **line);
 int		who_com(char *line);
-int		cout_len_token(char *str);
-char	*save_token(char	**line);
-int		is_oper(char str);
+void	tokenize_input(char	*line, t_shell *shell);
 
 #endif
