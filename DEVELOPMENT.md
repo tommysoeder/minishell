@@ -47,10 +47,10 @@
 
 - [x] Definir los tipos de token: `WORD`, `PIPE`, `REDIR`, `HEREDOC`, etc.
 - [x] Implementar el lexer que lee la línea y genera una lista de tokens
-- [ ] Manejar comillas simples: preservar contenido literal
-- [ ] Manejar comillas dobles: expansión de `$VAR` y `$?`
-- [ ] Detectar y reportar errores: comillas sin cerrar, pipes vacíos
-- [ ] Tests básicos del lexer con casos límite
+- [x] Manejar comillas simples: preservar contenido literal
+- [x] Manejar comillas dobles: expansión de `$VAR` y `$?`
+- [x] Detectar y reportar errores: comillas sin cerrar, pipes vacíos
+- [x] Tests básicos del lexer con casos límite
 
 ---
 
@@ -70,10 +70,10 @@
 ## Fase 3 — Expansión de variables
 > ⏱️ 2-3 días · Dev A
 
-- [ ] Implementar la expansión de `$VAR` buscando en el entorno
+- [x] Implementar la expansión de `$VAR` buscando en el entorno
 - [ ] Expansión de `$?` con el exit status del último proceso
-- [ ] Respetar que dentro de comillas simples no se expande nada
-- [ ] Manejar variables no definidas como cadena vacía
+- [x] Respetar que dentro de comillas simples no se expande nada
+- [x] Manejar variables no definidas como cadena vacía
 
 ---
 
