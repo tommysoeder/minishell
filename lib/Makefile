@@ -1,53 +1,62 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/08/07 13:18:47 by aialonso          #+#    #+#              #
-#    Updated: 2026/04/08 18:10:09 by aialonso         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = libft.a
-
-INC_PUS = inc
-SRC_PATH = src
-
-SOURCES =  	$(addprefix $(SRC_PATH)/,\
-			ft_bzero.c\
-			ft_calloc.c\
-			ft_strlen.c)
-
-FLAGS = -Wall -Wextra -Werror
-
-
-FLA_I = -I $(INC_PUS)
-
 CC = cc
+CFLAGS = -Wall -Wextra -Werror
+SRC = ft_atoi.c \
+ft_isalnum.c \
+ft_isdigit.c \
+ft_memcmp.c \
+ft_memset.c \
+ft_strlcpy.c \
+ft_strnstr.c \
+ft_toupper.c \
+ft_bzero.c \
+ft_isalpha.c \
+ft_isprint.c \
+ft_memcpy.c \
+ft_strchr.c \
+ft_strlen.c \
+ft_strrchr.c \
+ft_calloc.c \
+ft_isascii.c \
+ft_memchr.c \
+ft_memmove.c \
+ft_strlcat.c \
+ft_strncmp.c \
+ft_tolower.c \
+ft_strdup.c \
+ft_substr.c \
+ft_strjoin.c \
+ft_strtrim.c \
+ft_split.c \
+ft_itoa.c \
+ft_strmapi.c \
+ft_striteri.c \
+ft_putchar_fd.c \
+ft_putstr_fd.c \
+ft_putendl_fd.c \
+ft_putnbr_fd.c \
+get_next_line.c \
+get_next_line_utils.c \
+ft_printf.c \
 
-OBJECTS= $(SOURCES:.c=.o)
+
+OBJ = $(SRC:.c=.o)
+RM = rm -f
 
 all: $(NAME)
 
-$(NAME):$(OBJECTS)
-	@ar rcs $(NAME) $(OBJECTS)
-	
+$(NAME): $(OBJ)
+	@ar rcs $(NAME) $(OBJ)
+
 %.o: %.c
-	@$(CC) $(FLAGS) $(FLA_I) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@rm -f $(OBJECTS) $(OBJECTSB)
-	
-cleanb:
-	@rm -f $(OBJECTS) $(OBJECTSB)
-	
+	@$(RM) $(OBJ)
+
 fclean: clean
-	@rm -f $(NAME)
+	@$(RM) $(NAME)
 
-re: fclean all cleanb
+re: fclean all
 
-comp: re
-	$(CC) main.c $(NAME) -o librari
-	./librari
+.PHONY: all clean fclean re

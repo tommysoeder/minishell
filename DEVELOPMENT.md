@@ -23,7 +23,7 @@
 | 3. Expansión de variables | Dev A | `[ ]` |
 | 4. Builtins | Dev B | `[ ]` |
 | 5. Ejecución y procesos | Dev A | `[ ]` |
-| 6. Señales | Juntos | `[ ]` |
+| 6. Señales | Juntos | `[x]` |
 | 7. Gestión de memoria | Juntos | `[ ]` |
 | 8. Pulido y evaluación | Juntos | `[ ]` |
 | 9. Bonus (opcional) | Pareja | `[ ]` |

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+         #
+#    By: tomamart <tomamart@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/29 12:33:05 by aialonso          #+#    #+#              #
-#    Updated: 2026/04/08 18:13:43 by aialonso         ###   ########.fr        #
+#    Updated: 2026/04/20 19:39:12 by tomamart         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ LIB = lib
 
 SOURCES =   $(addprefix $(SRC_PATH)/,\
 			signals/signals.c\
+			env/env_utils.c\
 			cheker_line.c\
 			fix_quotes.c\
 			main.c\
