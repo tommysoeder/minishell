@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
+
 char	*get_env_value(char **envp, char *key)
 {
 	int		i;
@@ -33,7 +35,7 @@ char	*get_env_value(char **envp, char *key)
 	return (NULL);
 }
 
-char	*get_var_name(char *str, int i)
+/* char	*get_var_name(char *str, int i)
 {
 	char	*var_name;
 	int		var_len;
@@ -41,9 +43,9 @@ char	*get_var_name(char *str, int i)
 
 	i = 0;
 	var_len = ft_strlen(str);
-	var_name = (char *)malloc(sizeof(char) * (var_len + 1));
+	var_name = malloc(sizeof(char) * (var_len + 1));
 	if (!var_name)
 		return (NULL);
 	if (var_name[i] != '$')
 		;
-}
+} */

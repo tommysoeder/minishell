@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 15:59:48 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/18 11:14:43 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/21 17:57:27 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static int	count_real_token(char *str, char **var)
 	int	iter;
 
 	len_token = 0;
-	iter = -1;
-	while (str[++iter])
+	iter = 0;
+	while (str[iter])
 	{
 		if (str[iter] == 92 && is_special_char(str[iter + 1]))
 		{

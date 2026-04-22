@@ -6,7 +6,7 @@
 #    By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/29 12:33:05 by aialonso          #+#    #+#              #
-#    Updated: 2026/04/18 11:19:57 by aialonso         ###   ########.fr        #
+#    Updated: 2026/04/22 14:37:16 by aialonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,10 @@ SOURCES =   $(addprefix $(SRC_PATH)/,\
 			signals/signals.c\
 			cheker_line.c\
 			main.c\
+			init.c\
+			free.c\
+			env/env_utils.c\
+			find_path.c\
 			tokens/tokens.c\
 			tokens/fix_quotes_check.c\
 			tokens/fix_quotes_copy.c\

@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 19:03:05 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/16 15:44:19 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/22 15:10:33 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	count_tokens(char *line)
 	return (count_tokens);
 }
 
-void	tokenize_input(char	*line, t_shell *shell)
+int	tokenize_input(char	*line, t_shell *shell)
 {
 	char	**tokes;
 	int		*list_tokens;
@@ -66,18 +66,20 @@ void	tokenize_input(char	*line, t_shell *shell)
 	shell->num_tokens = count_tokens(line);
 	tokes = malloc(sizeof(char *) * (shell->num_tokens + 1));
 	if (!tokes)
-		return ;
+		return (1);
 	tokes[shell->num_tokens] = NULL;
 	list_tokens = malloc(sizeof(int) * shell->num_tokens);
 	if (!list_tokens)
-		return ;
+		return (free (tokes), 1);
 	while (*line)
 	{
 		tokes[iter] = save_token(&line);
+		if (!tokes[iter])
+			return (free_tokens(&tokes, &list_tokens), 1);
 		list_tokens[iter] = tip_token(tokes[iter]);
 		iter++;
 	}
 	shell->tokens = tokes;
 	shell->list_tokens = list_tokens;
-	return ;
+	return (0);
 }

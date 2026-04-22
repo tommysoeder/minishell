@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 15:38:26 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/16 15:49:16 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/22 14:46:32 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	*save_token(char	**line)
 		(*line)++;
 	count = cout_len_token(*line);
 	token = malloc(sizeof(char) * (count + 1));
+	if (!token)
+		return (NULL);
 	token[count] = '\0';
 	iter = 0;
 	while (iter < count)

@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:37:14 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/16 15:04:01 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/22 15:23:18 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	cheker_end_line(char **line)
 		if (!(*line)[i + 1] && flag != 0)
 		{
 			temp = readline(">");
+			if (!temp)
+				return (free(*line), (void)(*line = NULL));
 			*line = ft_realloc(*line, temp, ft_strlen(*line), ft_strlen(temp));
 			if (!*line)
 				return ;

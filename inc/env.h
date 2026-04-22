@@ -6,14 +6,12 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:07:40 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/08 15:07:47 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/19 18:36:13 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
-
-# include <unistd.h>
 
 char	*get_env_value(char **envp, char *key);
 
