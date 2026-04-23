@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 18:52:29 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/22 17:17:42 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/23 18:17:30 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,12 @@ void	free_tokens(char ***tokens, int **list_tokens);
 t_shell	*init_shell(char **envp, int argv, char **argc);
 int		init_comand(t_shell	*shell);
 void	init_exe(t_shell	*shell);
+int		is_builtin(char *token);
+void	exet_builtin(t_shell *shell);
+void	builtin_cd(t_shell *shell);
+void	builtin_echo(t_shell *shell);
+void	builtin_env(t_shell *shell);
+void	builtin_exit(t_shell *shell);
+void	builtin_pwd(void);
 
 #endif

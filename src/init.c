@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:17:37 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/22 16:23:29 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/23 18:07:41 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,38 @@ int	init_comand(t_shell	*shell)
 	return (0);
 }
 
+void	init_fork(char *path_result, t_shell *shell)
+{
+	pid_t	pid;
+	int		status;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		execve(path_result, shell->tokens, shell->envp);
+		exit(1);
+	}
+	else
+		waitpid(pid, &status, 0);
+	free(path_result);
+}
+
 void	init_exe(t_shell	*shell)
 {
-	int		status;
-	pid_t	pid;
+
 	char	*exet;
 	char	*path_result;
 	
-	exet = ft_strjoin("/", shell->tokens[0]);
-	if (!exet)
-		return ;
-	path_result = find_path(shell->envp, exet);
-	if (path_result)
+	if(is_builtin(shell->tokens[0]) == 0)
 	{
-		pid = fork();
-		if (pid == 0)
-		{
-			execve(path_result, shell->tokens, shell->envp);
-			exit(1);
-		}
-		else
-			waitpid(pid, &status, 0);
-		free(path_result);
+		exet = ft_strjoin("/", shell->tokens[0]);
+		if (!exet)
+			return ;
+		path_result = find_path(shell->envp, exet);
+		if (path_result)
+			init_fork(path_result, shell);
+		free(exet);
 	}
-	free(exet);
+	else
+		exet_builtin(shell);
 }
