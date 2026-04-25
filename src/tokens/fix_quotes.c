@@ -6,13 +6,13 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 15:59:48 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/21 17:57:27 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/25 10:03:15 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	count_real_token(char *str, char **var)
+static int	count_real_token(char *str, t_shell *shell)
 {
 	int	len_token;
 	int	iter;
@@ -28,16 +28,16 @@ static int	count_real_token(char *str, char **var)
 			continue ;
 		}
 		if (str[iter] == 34)
-			len_token += len_double_quote(str, var, &iter);
+			len_token += len_double_quote(str, &iter, shell);
 		else if (str[iter] == '$')
-			len_token += len_env_var(str, var, &iter);
+			len_token += len_env_var(str, &iter, shell);
 		else
 			len_token += len_sing(str, &iter);
 	}
 	return (len_token);
 }
 
-static char	*copy_real_token(char *new_token, char *token, char **var)
+static char	*copy_real_token(char *new_token, char *token, t_shell *shell)
 {
 	char	*copy_new_token;
 	int		n;
@@ -55,9 +55,9 @@ static char	*copy_real_token(char *new_token, char *token, char **var)
 			continue ;
 		}
 		if (token[n] == 34)
-			copy_double_quote(&new_token, token, &n, var);
+			copy_double_quote(&new_token, token, &n, shell);
 		else if (token[n] == '$')
-			copy_env_var(&new_token, token, &n, var);
+			copy_env_var(&new_token, token, &n, shell);
 		else
 			cop_sing(&new_token, token, &n);
 	}
@@ -65,28 +65,28 @@ static char	*copy_real_token(char *new_token, char *token, char **var)
 	return (copy_new_token);
 }
 
-static int	clean_token(char **token, char **var)
+static int	clean_token(char **token, t_shell *shell)
 {
 	int		len_new;
 	char	*new_token;
 
-	len_new = count_real_token(*token, var);
+	len_new = count_real_token(*token, shell);
 	new_token = ft_calloc(len_new + 1, sizeof(char));
 	if (!new_token)
 		return (1);
 	new_token[len_new] = '\0';
-	*token = copy_real_token(new_token, *token, var);
+	*token = copy_real_token(new_token, *token, shell);
 	return (0);
 }
 
-int	clean_tokens(char **tokens, char **var)
+int	clean_tokens(char **tokens, t_shell *shell)
 {
 	int	iter;
 
 	iter = 0;
 	while (tokens[iter])
 	{
-		if (clean_token(&tokens[iter], var) == 1)
+		if (clean_token(&tokens[iter], shell) == 1)
 			return (1);
 		iter++;
 	}

@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 17:52:33 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/23 18:21:46 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/25 14:28:37 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	is_builtin(char *token)
 void	exet_builtin(t_shell *shell)
 {
 	if (is_builtin(shell->tokens[0]) == 1)
-		builtin_pwd();
+		builtin_pwd(shell);
 /* 	else if (is_builtin(shell->tokens[0]) == 2)
 		builtin_cd(shell); */
 	else if (is_builtin(shell->tokens[0]) == 3)

@@ -6,12 +6,23 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 18:52:29 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/23 18:17:30 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/25 11:01:23 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+typedef struct s_shell
+{
+	char	*line;
+	char	**tokens;
+	int		num_tokens;
+	int		*list_tokens;
+	int		exit_status;
+	char	**envp;
+}	t_shell;
+
 
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -28,17 +39,6 @@
 
 # define PATH_MAX 4096
 
-typedef struct s_shell
-{
-	char	*line;
-	void	*resultado;
-	char	**tokens;
-	int		num_tokens;
-	int		*list_tokens;
-	int		exit_status;
-	char	**envp;
-}	t_shell;
-
 
 void	cheker_end_line(char **line);
 int		who_com(char *line);
@@ -54,6 +54,6 @@ void	builtin_cd(t_shell *shell);
 void	builtin_echo(t_shell *shell);
 void	builtin_env(t_shell *shell);
 void	builtin_exit(t_shell *shell);
-void	builtin_pwd(void);
+void	builtin_pwd(t_shell *shell);
 
 #endif

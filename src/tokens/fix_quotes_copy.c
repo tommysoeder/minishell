@@ -6,33 +6,33 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 19:25:37 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/18 11:16:35 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/25 10:50:14 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	copy_env_var(char **new_token, char *token, int *z, char **var)
+void	copy_env_var(char **n_token, char *token, int *z, t_shell *shell)
 {
 	int	n;
 	int	i;
 
 	n = 0;
-	while (var[n] != NULL)
+	while (shell->envp[n] != NULL && copy_status(token, n_token, shell, z) == 0)
 	{
 		i = 0;
-		while (var[n][i] != '=')
+		while (shell->envp[n][i] != '=')
 		{
-			if (var[n][i] != token[*z + i + 1])
+			if (shell->envp[n][i] != token[*z + i + 1])
 				break ;
 			i++;
 		}
-		if (var[n][i] == '=' && !is_var_char(token[*z + i +1]))
+		if (shell->envp[n][i] == '=' && !is_var_char(token[*z + i +1]))
 		{
-			while (var[n][++i])
+			while (shell->envp[n][++i])
 			{
-				(**new_token) = var[n][i];
-				(*new_token)++;
+				(**n_token) = shell->envp[n][i];
+				(*n_token)++;
 			}
 			break ;
 		}
@@ -41,13 +41,13 @@ void	copy_env_var(char **new_token, char *token, int *z, char **var)
 	*z += skip_var_name(token, z);
 }
 
-void	copy_double_quote(char **new_token, char *token, int *z, char **var)
+void	copy_double_quote(char **new_token, char *token, int *z, t_shell *shell)
 {
 	(*z)++;
 	while (token[*z] != 34)
 	{
 		if (token[*z] == '$')
-			copy_env_var(new_token, token, z, var);
+			copy_env_var(new_token, token, z, shell);
 		else if (token[*z] == 92 && is_special_char(token[*z + 1]))
 		{
 			(*z)++;

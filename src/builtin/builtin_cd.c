@@ -6,13 +6,13 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 18:23:39 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/23 18:11:24 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/25 08:18:33 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	builtin_cd(t_shell *shell)
+/* void	builtin_cd(t_shell *shell)
 {
 	char *pwd;
 	char *home;
@@ -23,3 +23,4 @@ void	builtin_cd(t_shell *shell)
 		chdir(home);
 	
 }
+ */

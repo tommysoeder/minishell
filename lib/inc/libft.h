@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 18:52:03 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/22 18:08:48 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/25 11:13:16 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *nptr);
+char	*ft_itoa(int n);
+int		ft_isnumeric(char *str);
 
 #endif

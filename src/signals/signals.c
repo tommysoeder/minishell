@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 15:22:53 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/23 18:47:09 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/25 09:06:38 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,10 @@ void	signals_child_exec(void)
 	sa.sa_flags = 0;
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
+}
+
+void	check_child_signal(int status)
+{
+	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
+		write(1, "\n", 1);
 }
