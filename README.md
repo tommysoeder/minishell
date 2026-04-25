@@ -27,40 +27,40 @@ Usa esta checklist antes de cada evaluación para asegurarte de que nada se esca
 
 ### `{ }` Parsing y tokenización
 
-- [ ] El lexer maneja correctamente comillas simples (sin expansión) ⚠️ `crash`
-- [ ] El lexer maneja correctamente comillas dobles (con expansión de `$`) ⚠️ `crash`
-- [ ] Las comillas sin cerrar devuelven error y no crashean ⚠️ `crash`
+- [X] El lexer maneja correctamente comillas simples (sin expansión) ⚠️ `crash`
+- [X] El lexer maneja correctamente comillas dobles (con expansión de `$`) ⚠️ `crash`
+- [X] Las comillas sin cerrar devuelven error y no crashean ⚠️ `crash`
 - [ ] El parsing de pipes `|` es correcto (incluye pipes múltiples) ⚠️ `crash`
 - [ ] Las redirecciones `>`, `>>`, `<`, `<<` se parsean correctamente ⚠️ `crash`
 - [ ] El heredoc `<<` bloquea la entrada hasta el delimitador ⚠️ `crash`
-- [ ] Los espacios y tabs entre tokens se ignoran correctamente
-- [ ] Los comandos vacíos o solo espacios no crashean ⚠️ `crash`
-- [ ] La expansión de `$?` devuelve el exit status del último comando
-- [ ] La expansión de `$VAR` funciona dentro de comillas dobles
+- [x] Los espacios y tabs entre tokens se ignoran correctamente
+- [x] Los comandos vacíos o solo espacios no crashean ⚠️ `crash`
+- [x] La expansión de `$?` devuelve el exit status del último comando
+- [x] La expansión de `$VAR` funciona dentro de comillas dobles
 
 ---
 
 ### `$_` Builtins
 
-- [ ] `echo` funciona con `-n` y sin argumentos ⚠️ `crash`
+- [x] `echo` funciona con `-n` y sin argumentos ⚠️ `crash`
 - [ ] `cd` acepta rutas relativas, absolutas, `~` y sin argumentos (`HOME`) ⚠️ `crash`
 - [ ] `cd` actualiza `$PWD` y `$OLDPWD` correctamente
-- [ ] `pwd` imprime el directorio actual sin argumentos
+- [x] `pwd` imprime el directorio actual sin argumentos
 - [ ] `export` sin argumentos lista variables en formato `declare -x`
 - [ ] `export VAR=valor` añade o actualiza la variable de entorno
 - [ ] `unset` elimina variables de entorno y no falla si no existen
-- [ ] `env` imprime el entorno actual
-- [ ] `exit` acepta un código numérico y sale con ese código `% 256` ⚠️ `crash`
+- [x] `env` imprime el entorno actual
+- [x] `exit` acepta un código numérico y sale con ese código `% 256` ⚠️ `crash`
 - [ ] Los builtins en un subshell (dentro de pipe) no afectan el shell padre
 
 ---
 
 ### `▶` Ejecución y procesos
 
-- [ ] Los comandos externos se buscan en `$PATH` correctamente ⚠️ `crash`
+- [x] Los comandos externos se buscan en `$PATH` correctamente ⚠️ `crash`
 - [ ] `execve` recibe `argv` y `envp` correctamente construidos ⚠️ `crash`
 - [ ] Cada comando en un pipe se ejecuta en un proceso hijo (`fork`) ⚠️ `crash`
-- [ ] El proceso padre hace `waitpid` de todos los hijos ⚠️ `crash`
+- [x] El proceso padre hace `waitpid` de todos los hijos ⚠️ `crash`
 - [ ] El exit status del pipeline es el del último comando
 - [ ] Los file descriptors de pipes se cierran en padre e hijo 🪣 `leak`
 - [ ] Las redirecciones de entrada/salida se aplican antes de `execve` ⚠️ `crash`
@@ -83,8 +83,8 @@ Usa esta checklist antes de cada evaluación para asegurarte de que nada se esca
 ### `M` Memoria y leaks
 
 - [ ] Todo `malloc` tiene su `free` correspondiente (valgrind limpio) 🪣 `leak`
-- [ ] `readline` no genera leaks — usar `rl_clear_history` al salir 🪣 `leak`
-- [ ] El árbol AST / lista de tokens se libera completamente tras cada comando 🪣 `leak`
+- [x] `readline` no genera leaks — usar `rl_clear_history` al salir 🪣 `leak`
+- [x] El árbol AST / lista de tokens se libera completamente tras cada comando 🪣 `leak`
 - [ ] El entorno (`envp` copia) se libera al salir 🪣 `leak`
 - [ ] Los file descriptors abiertos se cierran antes de salir 🪣 `leak`
 - [ ] No hay double free ni uso después de free ⚠️ `crash` 🪣 `leak`
