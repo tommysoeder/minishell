@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 19:28:02 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/22 15:59:31 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/25 19:15:25 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	free_shell(t_shell *shell)
 {
 	if (!shell)
 		return (0);
+	rl_clear_history();
 	free_tokens(&shell->tokens, &shell->list_tokens);
 	free(shell->line);
 	shell->line = NULL;
