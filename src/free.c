@@ -20,6 +20,7 @@ int	free_shell(t_shell *shell)
 	free_tokens(&shell->tokens, &shell->list_tokens);
 	free(shell->line);
 	shell->line = NULL;
+	free_envp(shell->envp);
 	free(shell);
 	shell = NULL;
 	return (0);

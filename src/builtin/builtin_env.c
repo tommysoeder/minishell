@@ -19,7 +19,8 @@ void	builtin_env(t_shell *shell)
 	n = 0;
 	while (shell->envp[n])
 	{
-		printf("%s\n", shell->envp[n]);
+		if (ft_strchr(shell->envp[n], '='))
+			printf("%s\n", shell->envp[n]);
 		n++;
 	}
 	shell->exit_status = 0;

@@ -39,10 +39,10 @@ void	exet_builtin(t_shell *shell)
 		builtin_cd(shell); */
 	else if (is_builtin(shell->tokens[0]) == 3)
 		builtin_echo(shell);
-/* 	else if (is_builtin(shell->tokens[0]) == 4)
-		builtin_export();
+	else if (is_builtin(shell->tokens[0]) == 4)
+		builtin_export(shell);
 	else if (is_builtin(shell->tokens[0]) == 5)
-		builtin_unset(); */
+		builtin_unset(shell);
 	else if (is_builtin(shell->tokens[0]) == 6)
 		builtin_env(shell);
 	else if (is_builtin(shell->tokens[0]) == 7)

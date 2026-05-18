@@ -21,7 +21,9 @@ t_shell	*init_shell(char **envp, int argc, char **argv)
 	shell = calloc(1, sizeof(t_shell));
 	if (!shell)
 		return (NULL);
-	shell->envp = envp;
+	shell->envp = copy_envp(envp);
+	if (!shell->envp)
+		return (free(shell), NULL);
 	shell->exit_status = 0;
 	return (shell);
 }

@@ -54,6 +54,8 @@ void	builtin_cd(t_shell *shell);
 void	builtin_echo(t_shell *shell);
 void	builtin_env(t_shell *shell);
 void	builtin_exit(t_shell *shell);
+void	builtin_export(t_shell *shell);
 void	builtin_pwd(t_shell *shell);
+void	builtin_unset(t_shell *shell);
 
 #endif
