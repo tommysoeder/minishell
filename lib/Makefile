@@ -6,7 +6,7 @@
 #    By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/07 13:18:47 by aialonso          #+#    #+#              #
-#    Updated: 2026/04/25 11:13:46 by aialonso         ###   ########.fr        #
+#    Updated: 2026/04/29 19:24:00 by aialonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SOURCES =  	$(addprefix $(SRC_PATH)/,\
 			ft_bzero.c\
 			ft_atoi.c\
 			ft_itoa.c\
+			ft_putstr_fd.c\
 			ft_isspace.c\
 			ft_calloc.c\
 			ft_split.c\

@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 18:37:46 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/25 08:43:31 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/04/29 16:53:44 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ char	*find_path(char **envp, char *token)
 	n = 0;
 	while (paths && paths[n])
 		free(paths[n++]);
+	free (token);
 	return (free(paths), resul);
 }

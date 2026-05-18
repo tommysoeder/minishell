@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:17:37 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/25 14:31:25 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/05/14 12:28:08 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ t_shell	*init_shell(char **envp, int argc, char **argv)
 		return (NULL);
 	shell->envp = envp;
 	shell->exit_status = 0;
+	shell->nex_exec = 0;
+	shell->num_child = 0;
+	shell->pid = NULL;
 	return (shell);
 }
 
@@ -48,54 +51,28 @@ int	init_comand(t_shell	*shell)
 	return (0);
 }
 
-void	init_fork(char *path_result, t_shell *shell)
-{
-	pid_t	pid;
-	int		status;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		signals_child_exec();
-		execve(path_result, shell->tokens, shell->envp);
-		exit(1);
-	}
-	else
-	{
-		signals_parent_exec();	
-		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
-			shell->exit_status = WEXITSTATUS(status);
-		else if (WIFSIGNALED(status))
-			shell->exit_status = 128 + WTERMSIG(status);
-		check_child_signal(status);
-	}
-	free(path_result);
-}
 
 void	init_exe(t_shell	*shell)
 {
-
-	char	*exet;
-	char	*path_result;
-
+	int save_stdin;
+	int save_stdout;
+	
 	if (!shell->line)
 		return ;
+	shell->num_child = contun_child(shell->list_tokens, shell->num_tokens);
 	if(is_builtin(shell->tokens[0]) == 0)
 	{
-		exet = ft_strjoin("/", shell->tokens[0]);
-		if (!exet)
-			return ;
-		path_result = find_path(shell->envp, exet);
-		if (path_result)
-			init_fork(path_result, shell);
-		else
-		{	
-			printf("minishell: %s: command not found\n", shell->tokens[0]);
-			shell->exit_status = 127;
-		}
-		free(exet);
+		init_forks(shell);
 	}
 	else
+	{
+		save_stdin = dup(0);
+		save_stdout = dup(1);
+		apply_redirects(shell);
 		exet_builtin(shell);
+		dup2(save_stdin, 0);
+		dup2(save_stdout, 1);
+		close(save_stdin);
+		close(save_stdout);
+	}
 }

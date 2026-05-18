@@ -6,7 +6,7 @@
 #    By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/29 12:33:05 by aialonso          #+#    #+#              #
-#    Updated: 2026/04/23 18:20:26 by aialonso         ###   ########.fr        #
+#    Updated: 2026/04/29 19:57:33 by aialonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ SOURCES =   $(addprefix $(SRC_PATH)/,\
 			signals/signals.c\
 			cheker_line.c\
 			main.c\
+			pipes/pipe_utils.c\
+			pipes/pipes.c\
 			builtin/builtin_cd.c\
 			builtin/builtin_echo.c\
 			builtin/builtin_env.c\

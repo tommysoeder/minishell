@@ -6,12 +6,19 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 18:52:29 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/25 11:01:23 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/05/14 12:34:09 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# define COMAN "minishell: %s: command not found\n"
+# define O_INPUT  (O_RDONLY)
+# define O_OUTPUT (O_WRONLY | O_CREAT | O_TRUNC)
+# define O_APPEND_F (O_WRONLY | O_CREAT | O_APPEND)
+
+# include <sys/types.h>
 
 typedef struct s_shell
 {
@@ -20,7 +27,10 @@ typedef struct s_shell
 	int		num_tokens;
 	int		*list_tokens;
 	int		exit_status;
+	int		nex_exec;
+	int		num_child;
 	char	**envp;
+	pid_t	*pid;
 }	t_shell;
 
 
@@ -31,6 +41,8 @@ typedef struct s_shell
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include "signals.h"
 # include "libft.h"
 # include "tokens.h"
@@ -55,5 +67,12 @@ void	builtin_echo(t_shell *shell);
 void	builtin_env(t_shell *shell);
 void	builtin_exit(t_shell *shell);
 void	builtin_pwd(t_shell *shell);
+void	exec_child(t_shell *shell, int prev_fd, int next_fd);
+int		contun_child(int *list_tokens, int num_tokens);
+int		next_exect(t_shell *shell);
+void	init_forks(t_shell *shell);
+void	wait_children(t_shell *shell, int num_child);
+void	open_redirect(t_shell *shell, int iter);
+void    apply_redirects(t_shell *shell);
 
 #endif
