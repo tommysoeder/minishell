@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 18:52:29 by aialonso          #+#    #+#             */
-/*   Updated: 2026/05/14 12:34:09 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/05/18 21:49:41 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	builtin_cd(t_shell *shell);
 void	builtin_echo(t_shell *shell);
 void	builtin_env(t_shell *shell);
 void	builtin_exit(t_shell *shell);
+void	builtin_export(t_shell *shell);
 void	builtin_pwd(t_shell *shell);
 void	exec_child(t_shell *shell, int prev_fd, int next_fd);
 int		contun_child(int *list_tokens, int num_tokens);
@@ -74,5 +75,6 @@ void	init_forks(t_shell *shell);
 void	wait_children(t_shell *shell, int num_child);
 void	open_redirect(t_shell *shell, int iter);
 void    apply_redirects(t_shell *shell);
+void	builtin_unset(t_shell *shell);
 
 #endif

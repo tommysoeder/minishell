@@ -24,6 +24,7 @@ SOURCES =  	$(addprefix $(SRC_PATH)/,\
 			ft_calloc.c\
 			ft_split.c\
 			ft_strchr.c\
+			ft_strdup.c\
 			ft_strlcpy.c\
 			ft_strncpm.c\
 			ft_substr.c\

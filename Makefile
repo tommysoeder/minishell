@@ -27,7 +27,9 @@ SOURCES =   $(addprefix $(SRC_PATH)/,\
 			builtin/builtin_echo.c\
 			builtin/builtin_env.c\
 			builtin/builtin_exit.c\
+			builtin/builtin_export.c\
 			builtin/builtin_pdw.c\
+			builtin/builtin_unset.c\
 			check_builtin.c\
 			init.c\
 			free.c\
