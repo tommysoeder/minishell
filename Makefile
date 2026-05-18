@@ -6,7 +6,7 @@
 #    By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/29 12:33:05 by aialonso          #+#    #+#              #
-#    Updated: 2026/04/29 19:57:33 by aialonso         ###   ########.fr        #
+#    Updated: 2026/05/18 23:20:54 by aialonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ LIB = lib
 
 SOURCES =   $(addprefix $(SRC_PATH)/,\
 			signals/signals.c\
+			env/env_utils.c\
 			cheker_line.c\
 			main.c\
 			pipes/pipe_utils.c\
@@ -33,7 +34,6 @@ SOURCES =   $(addprefix $(SRC_PATH)/,\
 			check_builtin.c\
 			init.c\
 			free.c\
-			env/env_utils.c\
 			find_path.c\
 			tokens/tokens.c\
 			tokens/fix_quotes_check.c\

@@ -6,7 +6,7 @@
 #    By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/07 13:18:47 by aialonso          #+#    #+#              #
-#    Updated: 2026/04/29 19:24:00 by aialonso         ###   ########.fr        #
+#    Updated: 2026/05/18 23:26:47 by aialonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = libft.a
 INC_PUS = inc
 SRC_PATH = src
 
-SOURCES =  	$(addprefix $(SRC_PATH)/,\
+SOURCES =	$(addprefix $(SRC_PATH)/,\
 			ft_bzero.c\
 			ft_atoi.c\
 			ft_itoa.c\
@@ -36,11 +36,8 @@ SOURCES =  	$(addprefix $(SRC_PATH)/,\
 			ft_strlen.c)
 
 FLAGS = -Wall -Wextra -Werror
-
-
-FLA_I = -I $(INC_PUS)
-
 CC = cc
+FLA_I = -I $(INC_PUS)
 
 OBJECTS= $(SOURCES:.c=.o)
 
@@ -48,21 +45,17 @@ all: $(NAME)
 
 $(NAME):$(OBJECTS)
 	@ar rcs $(NAME) $(OBJECTS)
-	
+
 %.o: %.c
 	@$(CC) $(FLAGS) $(FLA_I) -c $< -o $@
 
 clean:
-	@rm -f $(OBJECTS) $(OBJECTSB)
-	
-cleanb:
-	@rm -f $(OBJECTS) $(OBJECTSB)
-	
+	@rm -f $(OBJECTS)
+
 fclean: clean
 	@rm -f $(NAME)
 
-re: fclean all cleanb
+re: fclean all
 
-comp: re
-	$(CC) main.c $(NAME) -o librari
-	./librari
+.PHONY: all clean fclean re
+.DEFAULT_GOAL=all
