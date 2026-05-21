@@ -31,6 +31,7 @@ static int	export_arg(t_shell *shell, char *arg)
 	char	*key;
 	int		status;
 
+	status = 0;
 	equal = ft_strchr(arg, '=');
 	if (!equal)
 		key = ft_strdup(arg);
@@ -38,7 +39,8 @@ static int	export_arg(t_shell *shell, char *arg)
 		key = ft_substr(arg, 0, equal - arg);
 	if (!key)
 		return (1);
-	status = set_env_value(&shell->envp, key, NULL);
+	if (!get_env_value(shell->envp, key))
+		status = set_env_value(&shell->envp, key, NULL);
 	if (equal && status == 0)
 		status = set_env_value(&shell->envp, key, equal + 1);
 	if (status != 0)
@@ -60,7 +62,7 @@ void	builtin_export(t_shell *shell)
 		return ;
 	}
 	i = 1;
-	while (shell->tokens[i])
+	while (shell->tokens[i] && shell->list_tokens[i] == 1)
 	{
 		if (export_arg(shell, shell->tokens[i]) != 0)
 			shell->exit_status = 1;

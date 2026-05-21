@@ -20,10 +20,12 @@ LIB = lib
 SOURCES =   $(addprefix $(SRC_PATH)/,\
 			signals/signals.c\
 			env/env_utils.c\
+			env/env_ops.c\
 			cheker_line.c\
 			main.c\
 			pipes/pipe_utils.c\
 			pipes/pipes.c\
+			pipes/exec.c\
 			builtin/builtin_cd.c\
 			builtin/builtin_echo.c\
 			builtin/builtin_env.c\

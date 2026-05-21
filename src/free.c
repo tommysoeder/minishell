@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 19:28:02 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/25 19:15:25 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/05/21 13:45:48 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	free_shell(t_shell *shell)
 
 void	free_tokens(char ***tokens, int **list_tokens)
 {
-	int n;
+	int	n;
 
 	n = 0;
 	if (!tokens || !*tokens)
@@ -40,7 +40,7 @@ void	free_tokens(char ***tokens, int **list_tokens)
 		n++;
 	}
 	if (list_tokens && *list_tokens)
-	{	
+	{
 		free(*list_tokens);
 		*list_tokens = NULL;
 	}

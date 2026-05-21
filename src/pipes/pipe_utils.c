@@ -6,22 +6,22 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 17:07:52 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/30 12:04:06 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/05/21 14:14:58 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void heredonc(t_shell *shell, int iter)
+void	heredonc(t_shell *shell, int iter)
 {
-	int fd[2];
-	char *read;
-	char *token;
+	int		fd[2];
+	char	*read;
+	char	*token;
 
 	pipe(fd);
-	token = shell->tokens[shell->nex_exec+ iter + 1];
+	token = shell->tokens[shell->nex_exec + iter + 1];
 	read = readline(">");
-	while (ft_strncmp(read, token, ft_strlen(token) + 1))
+	while (read && ft_strncmp(read, token, ft_strlen(token) + 1))
 	{
 		write(fd[1], read, ft_strlen(read));
 		write(fd[1], "\n", 1);
@@ -34,28 +34,26 @@ void heredonc(t_shell *shell, int iter)
 	close(fd[0]);
 }
 
-void open_redirect(t_shell *shell, int iter)
+void	open_redirect(t_shell *shell, int iter)
 {
-	int fd;
-	char *token; 
+	int		fd;
+	char	*token;
 
 	fd = -1;
 	token = shell->tokens[shell->nex_exec + iter + 1];
 	if (shell->list_tokens[shell->nex_exec + iter] == 4)
 	{
-		fd = open(token, O_INPUT);
-		dup2(fd, 0);
+		fd = open(token, O_RDONLY);
+		if (fd != -1)
+			dup2(fd, 0);
 	}
 	if (shell->list_tokens[shell->nex_exec + iter] == 3)
-	{
-		fd = open(token, O_OUTPUT, 0644);
-		dup2(fd, 1);
-	}
+		fd = open(token, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (shell->list_tokens[shell->nex_exec + iter] == 5)
-	{
-		fd = open(token, O_APPEND_F, 0644);
+		fd = open(token, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	if (fd != -1 && (shell->list_tokens[shell->nex_exec + iter] == 5
+			|| shell->list_tokens[shell->nex_exec + iter] == 3))
 		dup2(fd, 1);
-	}
 	if (shell->list_tokens[shell->nex_exec + iter] == 6)
 		heredonc(shell, iter);
 	if (fd != -1)
@@ -64,14 +62,14 @@ void open_redirect(t_shell *shell, int iter)
 
 int	next_exect(t_shell *shell)
 {
-	int n;
+	int	n;
 
 	n = shell->nex_exec;
-	while(shell->tokens[n])
+	while (shell->tokens[n])
 	{
 		if (shell->list_tokens[n] == 2)
 		{
-			return (n + 1);	
+			return (n + 1);
 		}
 		n++;
 	}
@@ -80,8 +78,8 @@ int	next_exect(t_shell *shell)
 
 int	contun_child(int *list_tokens, int num_tokens)
 {
-	int n;
-	int num_child;
+	int	n;
+	int	num_child;
 
 	n = 0;
 	num_child = 0;
@@ -94,11 +92,11 @@ int	contun_child(int *list_tokens, int num_tokens)
 	return (num_child + 1);
 }
 
-void wait_children(t_shell *shell, int num_child)
+void	wait_children(t_shell *shell, int num_child)
 {
-	int		status;
-	
-	signals_parent_exec();	
+	int	status;
+
+	signals_parent_exec();
 	while (num_child > 0)
 	{
 		waitpid(-1, &status, 0);

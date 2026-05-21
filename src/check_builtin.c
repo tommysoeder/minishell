@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 17:52:33 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/25 14:28:37 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/05/21 13:45:03 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,17 @@ void	exet_builtin(t_shell *shell)
 {
 	if (is_builtin(shell->tokens[0]) == 1)
 		builtin_pwd(shell);
-/* 	else if (is_builtin(shell->tokens[0]) == 2)
-		builtin_cd(shell); */
+	else if (is_builtin(shell->tokens[0]) == 2)
+	{
+		if (builtin_cd(shell) == -1)
+		{
+			printf("cd: %s: No such file or directory\n",
+				shell->tokens[shell->nex_exec + 1]);
+			shell->exit_status = 1;
+		}
+		else
+			shell->exit_status = 0;
+	}
 	else if (is_builtin(shell->tokens[0]) == 3)
 		builtin_echo(shell);
 	else if (is_builtin(shell->tokens[0]) == 4)

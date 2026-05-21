@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 15:20:10 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/25 09:07:54 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/05/21 13:58:31 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 
 extern volatile sig_atomic_t	g_signal;
 
-void	sigint_interactive_handler(int sig);//handler para SIGINT en interactivo
-void	signals_interactive(void); // configuración de señales para readline
-void	signals_parent_exec(void);//comportamiento del padre durante la ejecuión
-void	signals_child_exec(void); // comportamiento del hijo antes de execve
+void	sigint_interactive_handler(int sig);
+void	signals_interactive(void);
+void	signals_parent_exec(void);
+void	signals_child_exec(void);
 void	check_child_signal(int status);
 
 #endif

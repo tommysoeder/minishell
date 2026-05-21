@@ -6,12 +6,14 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 11:01:53 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/25 10:13:44 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/05/21 14:04:28 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENS_H
 # define TOKENS_H
+
+typedef struct s_shell	t_shell;
 
 /* Token sin impiar */
 
@@ -29,7 +31,7 @@ int		len_double_quote(char *str, int *iter, t_shell *shell);
 int		len_env_var(char *str, int *iter, t_shell *shell);
 int		skip_var_name(char *str, int *iter);
 void	cop_sing(char **new_token, char *token, int *n);
-void	copy_double_quote(char **new_token, char *token, int *z, t_shell *shell);
+void	copy_double_quote(char **new_to, char *token, int *z, t_shell *shell);
 void	copy_env_var(char **new_token, char *token, int *z, t_shell *shell);
 void	is_status(char *str, int *count, t_shell *shell, int *iter);
 int		copy_status(char *str, char **new_token, t_shell *shell, int *iter);

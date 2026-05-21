@@ -6,7 +6,7 @@
 #    By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/07 13:18:47 by aialonso          #+#    #+#              #
-#    Updated: 2026/05/18 23:26:47 by aialonso         ###   ########.fr        #
+#    Updated: 2026/05/18 23:46:27 by aialonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,9 @@ $(NAME):$(OBJECTS)
 	@$(CC) $(FLAGS) $(FLA_I) -c $< -o $@
 
 clean:
+	@rm -f $(OBJECTS)
+
+cleanb:
 	@rm -f $(OBJECTS)
 
 fclean: clean

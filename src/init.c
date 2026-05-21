@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:17:37 by aialonso          #+#    #+#             */
-/*   Updated: 2026/05/14 12:28:08 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/05/21 13:47:58 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 t_shell	*init_shell(char **envp, int argc, char **argv)
 {
 	t_shell	*shell;
+
 	(void)argv;
 	(void)argc;
-
 	shell = calloc(1, sizeof(t_shell));
 	if (!shell)
 		return (NULL);
@@ -53,19 +53,16 @@ int	init_comand(t_shell	*shell)
 	return (0);
 }
 
-
 void	init_exe(t_shell	*shell)
 {
-	int save_stdin;
-	int save_stdout;
-	
+	int	save_stdin;
+	int	save_stdout;
+
 	if (!shell->line)
 		return ;
 	shell->num_child = contun_child(shell->list_tokens, shell->num_tokens);
-	if(is_builtin(shell->tokens[0]) == 0)
-	{
+	if (is_builtin(shell->tokens[0]) == 0)
 		init_forks(shell);
-	}
 	else
 	{
 		save_stdin = dup(0);

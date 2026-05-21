@@ -19,5 +19,6 @@ char	*get_env_value(char **envp, char *key);
 int		set_env_value(char ***envp, char *key, char *value);
 int		unset_env_value(char ***envp, char *key);
 int		is_valid_env_key(char *key);
+int		find_env_index(char **envp, char *key);
 
 #endif

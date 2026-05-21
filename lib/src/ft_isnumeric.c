@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 11:10:41 by aialonso          #+#    #+#             */
-/*   Updated: 2026/04/25 14:16:30 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/05/21 13:56:31 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_isnumeric(char *str)
 {
-	int n;
+	int	n;
 
 	n = 0;
 	while (str[n])

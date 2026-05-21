@@ -6,17 +6,13 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 18:52:29 by aialonso          #+#    #+#             */
-/*   Updated: 2026/05/18 21:59:32 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/05/21 14:10:19 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define COMAN "minishell: %s: command not found\n"
-# define O_INPUT  (O_RDONLY)
-# define O_OUTPUT (O_WRONLY | O_CREAT | O_TRUNC)
-# define O_APPEND_F (O_WRONLY | O_CREAT | O_APPEND)
 # define PATH_MAX 4096
 
 # include <sys/types.h>
@@ -31,9 +27,9 @@
 # include <readline/history.h>
 # include "signals.h"
 # include "libft.h"
-# include "tokens.h"
 # include "env.h"
 # include "path.h"
+# include "tokens.h"
 
 typedef struct s_shell
 {
@@ -58,9 +54,7 @@ int		init_comand(t_shell *shell);
 void	init_exe(t_shell *shell);
 int		is_builtin(char *token);
 void	exet_builtin(t_shell *shell);
-void	expand_tokens(t_shell *shell);
-char	*expand_variables(char *str, char **envp);
-void	builtin_cd(t_shell *shell);
+int		builtin_cd(t_shell *shell);
 void	builtin_echo(t_shell *shell);
 void	builtin_env(t_shell *shell);
 void	builtin_exit(t_shell *shell);
@@ -68,6 +62,7 @@ void	builtin_export(t_shell *shell);
 void	builtin_pwd(t_shell *shell);
 void	builtin_unset(t_shell *shell);
 void	exec_child(t_shell *shell, int prev_fd, int next_fd);
+char	*is_posix(t_shell *shell);
 int		contun_child(int *list_tokens, int num_tokens);
 int		next_exect(t_shell *shell);
 void	init_forks(t_shell *shell);

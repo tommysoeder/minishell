@@ -18,7 +18,7 @@ void	builtin_unset(t_shell *shell)
 
 	i = 1;
 	shell->exit_status = 0;
-	while (shell->tokens[i])
+	while (shell->tokens[i] && shell->list_tokens[i] == 1)
 	{
 		if (unset_env_value(&shell->envp, shell->tokens[i]) != 0)
 			shell->exit_status = 1;
