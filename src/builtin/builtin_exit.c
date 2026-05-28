@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 18:03:16 by aialonso          #+#    #+#             */
-/*   Updated: 2026/05/21 13:54:26 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/05/27 19:52:10 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	builtin_exit(t_shell *shell)
 	n = 0;
 	while (shell->list_tokens[n] && shell->list_tokens[n] == 1)
 		n++;
-	if ((shell->tokens[1] && !ft_isnumeric(shell->tokens[1]))
+	if ((shell->tokens[1] && ft_isnumeric(shell->tokens[1]))
 		|| n > 2)
 	{
 		shell->exit_status = 2;

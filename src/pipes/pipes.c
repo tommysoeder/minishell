@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 16:13:46 by aialonso          #+#    #+#             */
-/*   Updated: 2026/05/21 00:00:00 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/05/28 01:54:58 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	apply_redirects(t_shell *shell)
 	int	n;
 
 	n = 0;
-	while (shell->tokens[shell->nex_exec + n])
+	while (shell->tokens[shell->nex_exec + n]
+		&& shell->list_tokens[shell->nex_exec + n] != 2)
 	{
 		if (shell->list_tokens[shell->nex_exec + n] != 1)
 			open_redirect(shell, n);

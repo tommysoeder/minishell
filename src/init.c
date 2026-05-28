@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:17:37 by aialonso          #+#    #+#             */
-/*   Updated: 2026/05/21 13:47:58 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/05/28 01:47:33 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	init_exe(t_shell	*shell)
 	int	save_stdin;
 	int	save_stdout;
 
-	if (!shell->line)
+	if (!shell->line || !shell->tokens[0])
 		return ;
 	shell->num_child = contun_child(shell->list_tokens, shell->num_tokens);
 	if (is_builtin(shell->tokens[0]) == 0)

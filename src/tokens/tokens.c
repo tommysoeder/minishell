@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 19:03:05 by aialonso          #+#    #+#             */
-/*   Updated: 2026/05/21 12:21:17 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/05/28 01:36:13 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	tokenize_input(char *line, t_shell *shell)
 	if (!list_tokens)
 		return (free(tokes), 1);
 	list_tokens[shell->num_tokens] = 0;
-	while (*line)
+	while (*line && shell->num_tokens != iter)
 	{
 		tokes[iter] = save_token(&line);
 		if (!tokes[iter])
