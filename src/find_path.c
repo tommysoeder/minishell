@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomamart <tomamart@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 18:37:46 by aialonso          #+#    #+#             */
-/*   Updated: 2026/05/21 13:46:06 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/05/30 13:44:38 by tomamart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*find_path(char **envp, char *token)
 	int			n;
 
 	path = get_env_value(envp, "PATH");
+	if (!path)
+		return (NULL);
 	paths = ft_split(path, ':');
 	n = -1;
 	resul = NULL;
@@ -37,6 +39,6 @@ char	*find_path(char **envp, char *token)
 	n = 0;
 	while (paths && paths[n])
 		free(paths[n++]);
-	free (token);
-	return (free(paths), resul);
+	free (paths);
+	return (resul);
 }

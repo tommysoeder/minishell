@@ -65,6 +65,9 @@ void	init_forks(t_shell *shell)
 	shell->pid = calloc(shell->num_child, sizeof(pid_t));
 	while (n < shell->num_child)
 	{
+		if (shell->nex_exec != 0)
+			if (shell ->list_tokens[shell->nex_exec] != 1)
+				break;
 		init_pipes(shell, &prev_fd, n);
 		n++;
 		shell->nex_exec = next_exect(shell);

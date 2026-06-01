@@ -58,7 +58,7 @@ void	init_exe(t_shell	*shell)
 	int	save_stdin;
 	int	save_stdout;
 
-	if (!shell->line || !shell->tokens[0])
+	if (!shell->line || !shell->tokens[0] || shell->list_tokens[0] != 1)
 		return ;
 	shell->num_child = contun_child(shell->list_tokens, shell->num_tokens);
 	if (is_builtin(shell->tokens[0]) == 0)

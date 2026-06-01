@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomamart <tomamart@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 00:00:00 by aialonso          #+#    #+#             */
-/*   Updated: 2026/05/21 00:00:00 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/05/30 13:40:36 by tomamart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char	*is_posix(t_shell *shell)
 		if (!exec)
 			exit(1);
 		result = find_path(shell->envp, exec);
+		free(exec);
 	}
 	else if (!access(shell->tokens[shell->nex_exec], X_OK))
 		result = ft_strdup(shell->tokens[shell->nex_exec]);
