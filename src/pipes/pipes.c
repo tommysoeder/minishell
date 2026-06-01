@@ -6,7 +6,7 @@
 /*   By: aialonso <aialonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 16:13:46 by aialonso          #+#    #+#             */
-/*   Updated: 2026/05/28 01:54:58 by aialonso         ###   ########.fr       */
+/*   Updated: 2026/06/01 22:00:53 by aialonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ void	init_forks(t_shell *shell)
 	{
 		if (shell->nex_exec != 0)
 			if (shell ->list_tokens[shell->nex_exec] != 1)
+			{
+				shell->nex_exec = 0;
 				break;
+			}
 		init_pipes(shell, &prev_fd, n);
 		n++;
 		shell->nex_exec = next_exect(shell);
