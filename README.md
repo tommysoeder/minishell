@@ -1,142 +1,96 @@
-# 🐚 Minishell — 42 School
+*This project has been created as part of the 42 curriculum by aialonso, tomamart.*
 
-> Implementación de un shell en C siguiendo la Norminette de 42.
+# 🐚 Minishell — As beautiful as a shell
 
----
+## Description
 
-## 📋 Checklist de revisión de código
+Minishell is a project from the 42 curriculum that consists of building a functional Unix shell from scratch in C, inspired by Bash.
 
-Usa esta checklist antes de cada evaluación para asegurarte de que nada se escapa.
+The goal is to understand how a shell works internally: how it reads input, parses commands, manages processes, handles file descriptors, and interacts with the operating system. It is one of the most complete projects in the 42 curriculum, covering process management (`fork`, `execve`, `waitpid`), inter-process communication (`pipe`), signal handling, I/O redirections, and environment variable expansion.
 
-> 💡 **Descarga la versión imprimible** en [Releases](../../releases) · `minishell_checklist.docx`
-
----
-
-### 📐 Norminette
-
-- [ ] Todas las funciones tienen máximo 25 líneas
-- [ ] Máximo 5 funciones por archivo `.c`
-- [ ] Máximo 4 parámetros por función
-- [ ] No hay declaraciones de variables fuera del inicio de función
-- [ ] No se usan `for`, `do..while`, `switch` ni operadores ternarios
-- [ ] Los nombres siguen `snake_case` y convenciones de 42
-- [ ] No hay líneas de más de 80 caracteres
-- [ ] No hay funciones no autorizadas (solo las del subject) ⚠️ `crash`
+**Key features:**
+- Interactive prompt with command history
+- Command execution via `PATH`, relative, or absolute paths
+- Input/output redirections: `<`, `>`, `<<`, `>>`
+- Pipes (`|`) to chain commands
+- Environment variable expansion (`$VAR`, `$?`)
+- Signal handling: `ctrl-C`, `ctrl-D`, `ctrl-\`
+- Single (`'`) and double (`"`) quote handling
+- Built-in commands: `echo`, `cd`, `pwd`, `export`, `unset`, `env`, `exit`
 
 ---
 
-### `{ }` Parsing y tokenización
+## Instructions
 
-- [X] El lexer maneja correctamente comillas simples (sin expansión) ⚠️ `crash`
-- [X] El lexer maneja correctamente comillas dobles (con expansión de `$`) ⚠️ `crash`
-- [X] Las comillas sin cerrar devuelven error y no crashean ⚠️ `crash`
-- [ ] El parsing de pipes `|` es correcto (incluye pipes múltiples) ⚠️ `crash`
-- [ ] Las redirecciones `>`, `>>`, `<`, `<<` se parsean correctamente ⚠️ `crash`
-- [ ] El heredoc `<<` bloquea la entrada hasta el delimitador ⚠️ `crash`
-- [x] Los espacios y tabs entre tokens se ignoran correctamente
-- [x] Los comandos vacíos o solo espacios no crashean ⚠️ `crash`
-- [x] La expansión de `$?` devuelve el exit status del último comando
-- [x] La expansión de `$VAR` funciona dentro de comillas dobles
+### Requirements
 
----
+- GCC compiler
+- GNU Make
+- `readline` library
 
-### `$_` Builtins
+On Debian/Ubuntu:
+```bash
+sudo apt install libreadline-dev
+```
 
-- [x] `echo` funciona con `-n` y sin argumentos ⚠️ `crash`
-- [ ] `cd` acepta rutas relativas, absolutas, `~` y sin argumentos (`HOME`) ⚠️ `crash`
-- [ ] `cd` actualiza `$PWD` y `$OLDPWD` correctamente
-- [x] `pwd` imprime el directorio actual sin argumentos
-- [ ] `export` sin argumentos lista variables en formato `declare -x`
-- [ ] `export VAR=valor` añade o actualiza la variable de entorno
-- [ ] `unset` elimina variables de entorno y no falla si no existen
-- [x] `env` imprime el entorno actual
-- [x] `exit` acepta un código numérico y sale con ese código `% 256` ⚠️ `crash`
-- [ ] Los builtins en un subshell (dentro de pipe) no afectan el shell padre
-
----
-
-### `▶` Ejecución y procesos
-
-- [x] Los comandos externos se buscan en `$PATH` correctamente ⚠️ `crash`
-- [ ] `execve` recibe `argv` y `envp` correctamente construidos ⚠️ `crash`
-- [ ] Cada comando en un pipe se ejecuta en un proceso hijo (`fork`) ⚠️ `crash`
-- [x] El proceso padre hace `waitpid` de todos los hijos ⚠️ `crash`
-- [ ] El exit status del pipeline es el del último comando
-- [ ] Los file descriptors de pipes se cierran en padre e hijo 🪣 `leak`
-- [ ] Las redirecciones de entrada/salida se aplican antes de `execve` ⚠️ `crash`
-- [ ] Un comando no encontrado devuelve exit `127`
-- [ ] Un binario sin permiso de ejecución devuelve exit `126`
-
----
-
-### `~` Señales
-
-- [ ] `Ctrl+C` (SIGINT) en prompt imprime nueva línea y nuevo prompt ⚠️ `crash`
-- [ ] `Ctrl+\` (SIGQUIT) en prompt no hace nada (ignorado) ⚠️ `crash`
-- [ ] `Ctrl+D` en prompt cierra el shell limpiamente ⚠️ `crash`
-- [ ] `Ctrl+C` durante ejecución de comando interrumpe el hijo, no el shell ⚠️ `crash`
-- [ ] `Ctrl+\` durante ejecución genera core dump solo en el hijo
-- [ ] El exit status tras SIGINT es `130`, tras SIGQUIT es `131`
-
----
-
-### `M` Memoria y leaks
-
-- [ ] Todo `malloc` tiene su `free` correspondiente (valgrind limpio) 🪣 `leak`
-- [x] `readline` no genera leaks — usar `rl_clear_history` al salir 🪣 `leak`
-- [x] El árbol AST / lista de tokens se libera completamente tras cada comando 🪣 `leak`
-- [ ] El entorno (`envp` copia) se libera al salir 🪣 `leak`
-- [ ] Los file descriptors abiertos se cierran antes de salir 🪣 `leak`
-- [ ] No hay double free ni uso después de free ⚠️ `crash` 🪣 `leak`
-- [ ] `valgrind --leak-check=full` no muestra errores definitivos 🪣 `leak`
-
----
-
-### ⭐ Bonus
-
-- [ ] Operadores `&&` y `||` con prioridad correcta ⚠️ `crash`
-- [ ] Subshell con paréntesis `( cmd )` ejecuta en proceso hijo
-- [ ] Wildcards `*` se expanden correctamente en el directorio actual
-
----
-
-## 🏷️ Leyenda
-
-| Etiqueta | Significado |
-|----------|-------------|
-| ⚠️ `crash` | Puede hacer fallar la evaluación directamente |
-| 🪣 `leak` | Memory leak detectado por valgrind |
-| 📐 `norma` | Violación de la Norminette |
-| ⭐ `bonus` | Parte opcional del proyecto |
-
----
-
-## 🛠️ Comandos útiles
+### Compilation
 
 ```bash
-# Compilar
 make
+```
 
-# Comprobar norminette
-norminette src/ includes/
+This will produce the `minishell` executable.
 
-# Detectar leaks
-valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes ./minishell
+To clean object files:
+```bash
+make clean
+```
 
-# Comprobar file descriptors abiertos
-valgrind --track-fds=yes ./minishell
+To clean everything including the binary:
+```bash
+make fclean
+```
+
+To recompile from scratch:
+```bash
+make re
+```
+
+### Execution
+
+```bash
+./minishell
+```
+
+Once running, you can type commands just like in Bash:
+
+```bash
+minishell$ echo "Hello, World!"
+minishell$ ls -la | grep src
+minishell$ cat file.txt >> output.txt
+minishell$ export MY_VAR=42
+minishell$ echo $MY_VAR
+minishell$ exit
 ```
 
 ---
 
-## 📚 Recursos
+## Resources
 
-- [Bash Reference Manual](https://www.gnu.org/software/bash/manual/bash.html)
-- [man readline](https://tiswww.case.edu/php/chet/readline/rltop.html)
-- [Writing a Shell in C — Stephen Brennan](https://brennan.io/2015/01/16/write-a-shell-in-c/)
+### Documentation & References
 
----
+- [GNU Bash Reference Manual](https://www.gnu.org/software/bash/manual/bash.html) — The main reference for expected shell behaviour.
+- [Linux man pages: fork(2), execve(2), pipe(2), signal(7)](https://man7.org/linux/man-pages/) — Essential system calls used throughout the project.
+- [readline library documentation](https://tiswww.case.edu/php/chet/readline/rltop.html) — Used for the interactive prompt and history.
+- [Writing Your Own Shell — Stephen Brennan](https://brennan.io/2015/01/16/write-a-shell-in-c/) — A classic tutorial to understand the core concepts.
+- [The GNU C Library Reference Manual](https://www.gnu.org/software/libc/manual/) — Reference for standard C library functions.
 
-<p align="center">
-  <sub>Hecho con ❤️ para 42 School · <a href="../../releases">Descargar checklist .docx</a></sub>
-</p>
+### AI Usage
+
+AI tools (Claude) were used as a **learning and debugging aid** throughout this project, never as a code generator. Specifically:
+
+- **Concept clarification**: understanding how signals interact with forked processes, how `dup2` works with file descriptors, and how `heredoc` (`<<`) should behave.
+- **Debugging guidance**: asking questions about specific bugs (e.g., signal inheritance in child processes, `$?` expansion edge cases) to understand *what* was wrong, not to get a fix.
+- **Memory management review**: discussing strategies to avoid leaks, particularly around `readline` and the parser's token list.
+
+All code was written, understood, and is fully explainable by the project authors.
