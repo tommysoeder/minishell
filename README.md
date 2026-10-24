@@ -1,91 +1,137 @@
+# Minishell
+
+**A Unix shell written in C, developed collaboratively at 42 Madrid.**
+
 *This project has been created as part of the 42 curriculum by aialonso, tomamart.*
 
-# 🐚 Minishell — As beautiful as a shell
+Minishell explores what happens between typing a command and seeing its result: reading input, parsing tokens, expanding variables, launching processes, connecting pipes, and handling signals. Inspired by Bash, it implements a focused set of shell features as a systems programming learning project.
 
-## Description
+**Core technologies:** C · Unix/Linux · POSIX system calls · GNU Readline · Make
 
-Minishell is a project from the 42 curriculum that consists of building a functional Unix shell from scratch in C, inspired by Bash.
+## Features
 
-The goal is to understand how a shell works internally: how it reads input, parses commands, manages processes, handles file descriptors, and interacts with the operating system. It is one of the most complete projects in the 42 curriculum, covering process management (`fork`, `execve`, `waitpid`), inter-process communication (`pipe`), signal handling, I/O redirections, and environment variable expansion.
+- Interactive prompt with command history through GNU Readline.
+- External command execution using `PATH`, relative paths, or absolute paths.
+- External-command pipelines with `|` and input/output redirections: `<`, `>`, `>>`, and heredocs with `<<`.
+- Environment variable expansion with `$VAR` and exit status expansion with `$?`.
+- Single and double quote handling.
+- Built-in commands: `echo`, `cd`, `pwd`, `export`, `unset`, `env`, and `exit`.
+- Signal handling for `Ctrl+C` and `Ctrl+\`, plus end-of-input handling with `Ctrl+D`.
 
-**Key features:**
-- Interactive prompt with command history
-- Command execution via `PATH`, relative, or absolute paths
-- Input/output redirections: `<`, `>`, `<<`, `>>`
-- Pipes (`|`) to chain commands
-- Environment variable expansion (`$VAR`, `$?`)
-- Signal handling: `ctrl-C`, `ctrl-D`, `ctrl-\`
-- Single (`'`) and double (`"`) quote handling
-- Built-in commands: `echo`, `cd`, `pwd`, `export`, `unset`, `env`, `exit`
+Minishell implements a subset of Bash behaviour for educational use.
 
----
+## My contributions
 
-## Instructions
+This was a two-person project with **aialonso**. My main contributions as **tomamart ([tommysoeder](https://github.com/tommysoeder))** were:
+
+- **Signal handling:** contributing the logic for signal behaviour in the interactive shell and child processes.
+- **Environment variable expansion:** implementing variable substitution during command processing.
+- **Parsing:** contributing to part of the command parsing logic.
+- **Integration and debugging:** helping bring the components together and investigate issues across the shell.
+
+The feature list describes our shared project. The contributions above describe my main areas of work.
+
+## Technical concepts
+
+| Area | Concepts explored |
+| --- | --- |
+| Processes | Creating child processes with `fork`, executing programs with `execve`, and waiting for them with `waitpid` |
+| Pipes and redirections | Connecting commands with `pipe`, redirecting file descriptors with `dup2`, and managing descriptor lifetimes |
+| Signals | Handling `SIGINT` and `SIGQUIT` across the interactive shell and child processes |
+| Parsing and expansion | Tokenising input, handling quotes, and resolving environment variables and exit status |
+| Memory and resources | Managing dynamically allocated command data, environment entries, and cleanup paths in C |
+| Collaboration | Integrating separately developed components and debugging their interactions |
+
+## Build and run
 
 ### Requirements
 
-- GCC compiler
-- GNU Make
-- `readline` library
+- A Linux environment with a C compiler available as `cc` (GCC or Clang).
+- GNU Make and Git.
+- GNU Readline development headers and library.
+- Compiler support and runtime libraries for AddressSanitizer, enabled by the existing Makefile.
 
-On Debian/Ubuntu:
+On Debian or Ubuntu, install the build dependencies:
+
 ```bash
-sudo apt install libreadline-dev
+sudo apt update
+sudo apt install build-essential git libreadline-dev
 ```
 
-### Compilation
+Clone this repository, build it, and start the shell:
 
 ```bash
+git clone https://github.com/tommysoeder/minishell.git
+cd minishell
 make
-```
-
-This will produce the `minishell` executable.
-
-To clean object files:
-```bash
-make clean
-```
-
-To clean everything including the binary:
-```bash
-make fclean
-```
-
-To recompile from scratch:
-```bash
-make re
-```
-
-### Execution
-
-```bash
 ./minishell
 ```
 
-Once running, you can type commands just like in Bash:
+The build uses the bundled library in `lib/` and links against GNU Readline. The current Makefile enables `-Wall -Wextra -Werror`, debug symbols (`-g3`), and AddressSanitizer (`-fsanitize=address`).
+
+| Command | Purpose |
+| --- | --- |
+| `make` | Build the `minishell` executable |
+| `make clean` | Remove object files |
+| `make fclean` | Remove object files, the bundled library archive, and the executable |
+| `make re` | Rebuild from scratch |
+
+## Usage examples
+
+After launching `./minishell`, enter these commands one line at a time:
 
 ```bash
-minishell$ echo "Hello, World!"
-minishell$ ls -la | grep src
-minishell$ cat file.txt >> output.txt
-minishell$ export MY_VAR=42
-minishell$ echo $MY_VAR
-minishell$ exit
+pwd
+echo "Hello from Minishell"
+ls -l | wc -l
+export PROJECT=Minishell
+echo "$PROJECT"
+echo '$PROJECT'
+false
+echo $?
+exit
 ```
 
----
+The double-quoted variable is expanded; the single-quoted version stays literal. `false` exits with status `1`, which can then be inspected with `echo $?`.
+
+To try redirections, run the following inside Minishell. These commands create or overwrite `minishell-demo.txt` in the current directory:
+
+```bash
+ls -l > minishell-demo.txt
+ls -l >> minishell-demo.txt
+cat < minishell-demo.txt
+```
+
+## Scope and current limitations
+
+- Builtins at the start of a pipeline run through a separate execution path, so those pipelines do not behave like Bash pipelines.
+- Pipeline exit status is based on the last child reaped, which may differ from the last command in the pipeline.
+- Heredoc input is read literally; variables in its body are not expanded.
+- Logical operators (`&&`, `||`), wildcard expansion, subshells, and job control are outside the current implementation.
+
+## What I learned
+
+- How signal handling affects an interactive program and the processes it launches.
+- Why quote handling and variable expansion need to be considered together during parsing.
+- How process execution, file descriptors, and resource cleanup interact in a shell.
+- How to investigate integration bugs and coordinate changes in a shared C codebase.
+
+## Authors and credits
+
+- **tomamart** — [tommysoeder](https://github.com/tommysoeder). Main contributions described above.
+- **aialonso** — co-author of this collaborative 42 project.
+
+This repository is a fork of the [original collaboration repository](https://github.com/PAYTheVendetta/minishell). Credit for the project belongs to both authors.
 
 ## Resources
 
-### Documentation & References
+- [GNU Bash Reference Manual](https://www.gnu.org/software/bash/manual/bash.html) — reference for shell behaviour.
+- [Linux man pages](https://man7.org/linux/man-pages/) — documentation for system calls such as `fork`, `execve`, and `pipe`, and for signals.
+- [GNU Readline documentation](https://tiswww.case.edu/php/chet/readline/rltop.html) — interactive input and history.
+- [Writing Your Own Shell — Stephen Brennan](https://brennan.io/2015/01/16/write-a-shell-in-c/) — introduction to shell implementation.
+- [The GNU C Library Reference Manual](https://www.gnu.org/software/libc/manual/) — C library reference.
 
-- [GNU Bash Reference Manual](https://www.gnu.org/software/bash/manual/bash.html) — The main reference for expected shell behaviour.
-- [Linux man pages: fork(2), execve(2), pipe(2), signal(7)](https://man7.org/linux/man-pages/) — Essential system calls used throughout the project.
-- [readline library documentation](https://tiswww.case.edu/php/chet/readline/rltop.html) — Used for the interactive prompt and history.
-- [Writing Your Own Shell — Stephen Brennan](https://brennan.io/2015/01/16/write-a-shell-in-c/) — A classic tutorial to understand the core concepts.
-- [The GNU C Library Reference Manual](https://www.gnu.org/software/libc/manual/) — Reference for standard C library functions.
-
-### AI Usage
+## AI Usage
 
 AI tools (Claude) were used as a **learning and debugging aid** throughout this project, never as a code generator. Specifically:
 
